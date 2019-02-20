@@ -5,7 +5,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: mymoto/mymoto
+    image: mymoto
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
