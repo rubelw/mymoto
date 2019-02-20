@@ -20,7 +20,7 @@ node {
                    docker-compose -f docker-compose.yml build
                    docker container ls --all
                    docker image list
-                   CONTAINER_ID=\$(docker images | grep 'moto]s*latest' | awk '{print \$3}')
+                   CONTAINER_ID=\$(docker images | grep 'moto\s*latest' | awk '{print \$3}')
                    echo "Container id: \${CONTAINER_ID}"
                    echo "\${GITHUB_PASSWORD}" | docker login --username="\${GITHUB_USERNAME} --email=will.rubel@gmail.com --password-stdin
                    docker tag "\${CONTAINER_ID}" rubelw/mymoto
