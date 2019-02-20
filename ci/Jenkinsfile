@@ -18,6 +18,7 @@ node {
             sh """
 
                    CONTAINER_ID=\$(docker-compose -f docker-compose.yml build)
+                   echo "Container id: \${CONTAINER_ID}"
                    docker container ls --all
                    docker image list
                    echo "\${GITHUB_PASSWORD} | docker login --username="\${GITHUB_USERNAME} --email=will.rubel@gmail.com --password-stdin
