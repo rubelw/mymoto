@@ -1,0 +1,124 @@
+I, [2019-02-20T04:20:07.990502 #323]  INFO -- Kitchen: -----> Starting Kitchen (v1.24.0)
+W, [2019-02-20T04:20:15.133894 #323]  WARN -- Kitchen: Running command `terraform version`
+I, [2019-02-20T04:20:16.422201 #323]  INFO -- Kitchen: 2019/02/20 04:20:16 [INFO] Terraform version: 0.11.11  ac4fff416318bf0915a0ab80e062a99ef3724334
+I, [2019-02-20T04:20:16.423027 #323]  INFO -- Kitchen: 2019/02/20 04:20:16 [INFO] Go runtime version: go1.11.1
+I, [2019-02-20T04:20:16.427038 #323]  INFO -- Kitchen: 2019/02/20 04:20:16 [INFO] CLI args: []string{"/usr/local/bin/terraform", "version"}
+I, [2019-02-20T04:20:16.427655 #323]  INFO -- Kitchen: 2019/02/20 04:20:16 [DEBUG] Attempting to open CLI config file: /root/.terraformrc
+I, [2019-02-20T04:20:16.428535 #323]  INFO -- Kitchen: 2019/02/20 04:20:16 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+I, [2019-02-20T04:20:16.439432 #323]  INFO -- Kitchen: 2019/02/20 04:20:16 [INFO] CLI command args: []string{"version"}
+I, [2019-02-20T04:20:16.441217 #323]  INFO -- Kitchen: Terraform v0.11.11
+I, [2019-02-20T04:20:16.462527 #323]  INFO -- Kitchen: 2019/02/20 04:20:16 [DEBUG] checking for provider in "."
+I, [2019-02-20T04:20:16.463349 #323]  INFO -- Kitchen: 2019/02/20 04:20:16 [DEBUG] checking for provider in "/usr/local/bin"
+I, [2019-02-20T04:20:16.464550 #323]  INFO -- Kitchen: 
+I, [2019-02-20T04:20:16.465475 #323]  INFO -- Kitchen: 2019/02/20 04:20:16 [INFO] Failed to read plugin lock file .terraform/plugins/linux_amd64/lock.json: open .terraform/plugins/linux_amd64/lock.json: no such file or directory
+I, [2019-02-20T04:20:19.139740 #323]  INFO -- Kitchen: 2019/02/20 04:20:19 [DEBUG] plugin: waiting for all plugin processes to complete...
+W, [2019-02-20T04:20:19.192583 #323]  WARN -- Kitchen: Terraform v0.11.11 is supported
+I, [2019-02-20T04:20:19.313311 #323]  INFO -- Kitchen: -----> Creating <base-aws>...
+E, [2019-02-20T04:20:20.054978 #323] ERROR -- Kitchen: ------Exception-------
+E, [2019-02-20T04:20:20.055467 #323] ERROR -- Kitchen: Class: Kitchen::ActionFailed
+E, [2019-02-20T04:20:20.055798 #323] ERROR -- Kitchen: Message: 1 actions failed.
+>>>>>>     Create failed on instance <base-aws>.  Please see .kitchen/logs/base-aws.log for more details
+E, [2019-02-20T04:20:20.056157 #323] ERROR -- Kitchen: ----------------------
+E, [2019-02-20T04:20:20.056489 #323] ERROR -- Kitchen: ------Backtrace-------
+E, [2019-02-20T04:20:20.056816 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:183:in `report_errors'
+E, [2019-02-20T04:20:20.061781 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:174:in `run_action'
+E, [2019-02-20T04:20:20.062273 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command/action.rb:36:in `block in call'
+E, [2019-02-20T04:20:20.062618 #323] ERROR -- Kitchen: /usr/lib/ruby/2.5.0/benchmark.rb:293:in `measure'
+E, [2019-02-20T04:20:20.062956 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command/action.rb:34:in `call'
+E, [2019-02-20T04:20:20.063361 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/cli.rb:52:in `perform'
+E, [2019-02-20T04:20:20.063688 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/cli.rb:193:in `block (2 levels) in <class:CLI>'
+E, [2019-02-20T04:20:20.064022 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/thor-0.20.3/lib/thor/command.rb:27:in `run'
+E, [2019-02-20T04:20:20.064348 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/thor-0.20.3/lib/thor/invocation.rb:126:in `invoke_command'
+E, [2019-02-20T04:20:20.064735 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/thor-0.20.3/lib/thor.rb:387:in `dispatch'
+E, [2019-02-20T04:20:20.065059 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/thor-0.20.3/lib/thor/base.rb:466:in `start'
+E, [2019-02-20T04:20:20.065381 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/bin/kitchen:13:in `block in <top (required)>'
+E, [2019-02-20T04:20:20.065732 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/errors.rb:171:in `with_friendly_errors'
+E, [2019-02-20T04:20:20.066118 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/bin/kitchen:13:in `<top (required)>'
+E, [2019-02-20T04:20:20.066443 #323] ERROR -- Kitchen: /usr/bin/kitchen:23:in `load'
+E, [2019-02-20T04:20:20.066768 #323] ERROR -- Kitchen: /usr/bin/kitchen:23:in `<top (required)>'
+E, [2019-02-20T04:20:20.071961 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/cli/exec.rb:74:in `load'
+E, [2019-02-20T04:20:20.072547 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/cli/exec.rb:74:in `kernel_load'
+E, [2019-02-20T04:20:20.072924 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/cli/exec.rb:28:in `run'
+E, [2019-02-20T04:20:20.073268 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/cli.rb:463:in `exec'
+E, [2019-02-20T04:20:20.073695 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'
+E, [2019-02-20T04:20:20.074027 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'
+E, [2019-02-20T04:20:20.074356 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/vendor/thor/lib/thor.rb:387:in `dispatch'
+E, [2019-02-20T04:20:20.074678 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/cli.rb:27:in `dispatch'
+E, [2019-02-20T04:20:20.075000 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/vendor/thor/lib/thor/base.rb:466:in `start'
+E, [2019-02-20T04:20:20.075311 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/cli.rb:18:in `start'
+E, [2019-02-20T04:20:20.075641 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/exe/bundle:30:in `block in <top (required)>'
+E, [2019-02-20T04:20:20.075960 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/lib/bundler/friendly_errors.rb:124:in `with_friendly_errors'
+E, [2019-02-20T04:20:20.076307 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/bundler-2.0.1/exe/bundle:22:in `<top (required)>'
+E, [2019-02-20T04:20:20.076669 #323] ERROR -- Kitchen: /usr/bin/bundle:23:in `load'
+E, [2019-02-20T04:20:20.077016 #323] ERROR -- Kitchen: /usr/bin/bundle:23:in `<main>'
+E, [2019-02-20T04:20:20.077442 #323] ERROR -- Kitchen: ----End Backtrace-----
+E, [2019-02-20T04:20:20.083021 #323] ERROR -- Kitchen: -Composite Exception--
+E, [2019-02-20T04:20:20.083407 #323] ERROR -- Kitchen: Class: Kitchen::InstanceFailure
+E, [2019-02-20T04:20:20.083738 #323] ERROR -- Kitchen: Message: Create failed on instance <base-aws>.  Please see .kitchen/logs/base-aws.log for more details
+E, [2019-02-20T04:20:20.084083 #323] ERROR -- Kitchen: ----------------------
+E, [2019-02-20T04:20:20.084419 #323] ERROR -- Kitchen: ------Backtrace-------
+E, [2019-02-20T04:20:20.084743 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/kitchen-terraform-3.3.1/lib/kitchen/driver/terraform.rb:264:in `rescue in create'
+E, [2019-02-20T04:20:20.085084 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/kitchen-terraform-3.3.1/lib/kitchen/driver/terraform.rb:260:in `create'
+E, [2019-02-20T04:20:20.085413 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `public_send'
+E, [2019-02-20T04:20:20.085731 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `block in perform_action'
+E, [2019-02-20T04:20:20.086075 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:551:in `synchronize_or_call'
+E, [2019-02-20T04:20:20.086386 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:513:in `block in action'
+E, [2019-02-20T04:20:20.086709 #323] ERROR -- Kitchen: /usr/lib/ruby/2.5.0/benchmark.rb:293:in `measure'
+E, [2019-02-20T04:20:20.087055 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:512:in `action'
+E, [2019-02-20T04:20:20.087366 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `perform_action'
+E, [2019-02-20T04:20:20.087708 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:394:in `create_action'
+E, [2019-02-20T04:20:20.088039 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:382:in `block (2 levels) in transition_to'
+E, [2019-02-20T04:20:20.088353 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/lifecycle_hooks.rb:45:in `run_with_hooks'
+E, [2019-02-20T04:20:20.088661 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:381:in `block in transition_to'
+E, [2019-02-20T04:20:20.088996 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:380:in `each'
+E, [2019-02-20T04:20:20.089348 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:380:in `transition_to'
+E, [2019-02-20T04:20:20.092758 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:140:in `converge'
+E, [2019-02-20T04:20:20.093200 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:197:in `public_send'
+E, [2019-02-20T04:20:20.093599 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:197:in `run_action_in_thread'
+E, [2019-02-20T04:20:20.093970 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:169:in `block (2 levels) in run_action'
+E, [2019-02-20T04:20:20.094385 #323] ERROR -- Kitchen: ----End Backtrace-----
+E, [2019-02-20T04:20:20.094803 #323] ERROR -- Kitchen: ---Nested Exception---
+E, [2019-02-20T04:20:20.095198 #323] ERROR -- Kitchen: Class: Kitchen::ActionFailed
+E, [2019-02-20T04:20:20.095526 #323] ERROR -- Kitchen: Message: Running command resulted in failure: Expected process to exit with [0], but received '1'
+---- Begin output of terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures ----
+STDOUT: 
+STDERR: 2019/02/20 04:20:19 [INFO] Terraform version: 0.11.11  ac4fff416318bf0915a0ab80e062a99ef3724334
+2019/02/20 04:20:19 [INFO] Go runtime version: go1.11.1
+2019/02/20 04:20:19 [INFO] CLI args: []string{"/usr/local/bin/terraform", "init", "-input=false", "-lock=true", "-lock-timeout=0s", "-no-color", "-upgrade", "-force-copy", "-backend=true", "-get=true", "-get-plugins=true", "-verify-plugins=true", "/tmp/tests/test/fixtures"}
+2019/02/20 04:20:19 [DEBUG] Attempting to open CLI config file: /root/.terraformrc
+2019/02/20 04:20:19 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2019/02/20 04:20:19 [INFO] CLI command args: []string{"init", "-input=false", "-lock=true", "-lock-timeout=0s", "-no-color", "-upgrade", "-force-copy", "-backend=true", "-get=true", "-get-plugins=true", "-verify-plugins=true", "/tmp/tests/test/fixtures"}
+2019/02/20 04:20:19 [DEBUG] command: loading backend config file: /tmp/tests/test/fixtures
+There are some problems with the configuration, described below.
+
+The Terraform configuration must be valid before initialization so that
+Terraform can determine which modules and providers need to be installed.
+
+Error: Error parsing /tmp/tests/test/fixtures/provider.tf: object expected closing RBRACE got: EOF
+
+
+2019/02/20 04:20:19 [DEBUG] plugin: waiting for all plugin processes to complete...
+---- End output of terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures ----
+Ran terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures returned 1
+E, [2019-02-20T04:20:20.095905 #323] ERROR -- Kitchen: ----------------------
+E, [2019-02-20T04:20:20.096264 #323] ERROR -- Kitchen: ------Backtrace-------
+E, [2019-02-20T04:20:20.096594 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/kitchen-terraform-3.3.1/lib/kitchen/driver/terraform.rb:264:in `rescue in create'
+E, [2019-02-20T04:20:20.102800 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/kitchen-terraform-3.3.1/lib/kitchen/driver/terraform.rb:260:in `create'
+E, [2019-02-20T04:20:20.103300 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `public_send'
+E, [2019-02-20T04:20:20.103650 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `block in perform_action'
+E, [2019-02-20T04:20:20.104131 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:551:in `synchronize_or_call'
+E, [2019-02-20T04:20:20.104501 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:513:in `block in action'
+E, [2019-02-20T04:20:20.104846 #323] ERROR -- Kitchen: /usr/lib/ruby/2.5.0/benchmark.rb:293:in `measure'
+E, [2019-02-20T04:20:20.105172 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:512:in `action'
+E, [2019-02-20T04:20:20.105583 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `perform_action'
+E, [2019-02-20T04:20:20.105909 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:394:in `create_action'
+E, [2019-02-20T04:20:20.106240 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:382:in `block (2 levels) in transition_to'
+E, [2019-02-20T04:20:20.106570 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/lifecycle_hooks.rb:45:in `run_with_hooks'
+E, [2019-02-20T04:20:20.106895 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:381:in `block in transition_to'
+E, [2019-02-20T04:20:20.107222 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:380:in `each'
+E, [2019-02-20T04:20:20.107543 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:380:in `transition_to'
+E, [2019-02-20T04:20:20.107893 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:140:in `converge'
+E, [2019-02-20T04:20:20.108234 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:197:in `public_send'
+E, [2019-02-20T04:20:20.108559 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:197:in `run_action_in_thread'
+E, [2019-02-20T04:20:20.108898 #323] ERROR -- Kitchen: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:169:in `block (2 levels) in run_action'
+E, [2019-02-20T04:20:20.109258 #323] ERROR -- Kitchen: ----End Backtrace-----

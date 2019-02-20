@@ -1,0 +1,109 @@
+I, [2019-02-20T04:20:19.313831 #323]  INFO -- base-aws: -----> Creating <base-aws>...
+W, [2019-02-20T04:20:19.314725 #323]  WARN -- base-aws: Running command `terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures`
+I, [2019-02-20T04:20:19.853283 #323]  INFO -- base-aws: 2019/02/20 04:20:19 [INFO] Terraform version: 0.11.11  ac4fff416318bf0915a0ab80e062a99ef3724334
+I, [2019-02-20T04:20:19.853836 #323]  INFO -- base-aws: 2019/02/20 04:20:19 [INFO] Go runtime version: go1.11.1
+I, [2019-02-20T04:20:19.854863 #323]  INFO -- base-aws: 2019/02/20 04:20:19 [INFO] CLI args: []string{"/usr/local/bin/terraform", "init", "-input=false", "-lock=true", "-lock-timeout=0s", "-no-color", "-upgrade", "-force-copy", "-backend=true", "-get=true", "-get-plugins=true", "-verify-plugins=true", "/tmp/tests/test/fixtures"}
+I, [2019-02-20T04:20:19.855749 #323]  INFO -- base-aws: 2019/02/20 04:20:19 [DEBUG] Attempting to open CLI config file: /root/.terraformrc
+I, [2019-02-20T04:20:19.861330 #323]  INFO -- base-aws: 2019/02/20 04:20:19 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+I, [2019-02-20T04:20:19.862233 #323]  INFO -- base-aws: 2019/02/20 04:20:19 [INFO] CLI command args: []string{"init", "-input=false", "-lock=true", "-lock-timeout=0s", "-no-color", "-upgrade", "-force-copy", "-backend=true", "-get=true", "-get-plugins=true", "-verify-plugins=true", "/tmp/tests/test/fixtures"}
+I, [2019-02-20T04:20:19.873630 #323]  INFO -- base-aws: 2019/02/20 04:20:19 [DEBUG] command: loading backend config file: /tmp/tests/test/fixtures
+I, [2019-02-20T04:20:19.907030 #323]  INFO -- base-aws: There are some problems with the configuration, described below.
+I, [2019-02-20T04:20:19.907627 #323]  INFO -- base-aws: 
+I, [2019-02-20T04:20:19.908171 #323]  INFO -- base-aws: The Terraform configuration must be valid before initialization so that
+I, [2019-02-20T04:20:19.909956 #323]  INFO -- base-aws: Terraform can determine which modules and providers need to be installed.
+I, [2019-02-20T04:20:19.910449 #323]  INFO -- base-aws: 
+I, [2019-02-20T04:20:19.916583 #323]  INFO -- base-aws: Error: Error parsing /tmp/tests/test/fixtures/provider.tf: object expected closing RBRACE got: EOF
+I, [2019-02-20T04:20:19.917139 #323]  INFO -- base-aws: 
+I, [2019-02-20T04:20:19.917557 #323]  INFO -- base-aws: 
+I, [2019-02-20T04:20:19.918164 #323]  INFO -- base-aws: 2019/02/20 04:20:19 [DEBUG] plugin: waiting for all plugin processes to complete...
+E, [2019-02-20T04:20:20.022058 #323] ERROR -- base-aws: Create failed on instance <base-aws>.
+E, [2019-02-20T04:20:20.022704 #323] ERROR -- base-aws: ------Exception-------
+E, [2019-02-20T04:20:20.023058 #323] ERROR -- base-aws: Class: Kitchen::ActionFailed
+E, [2019-02-20T04:20:20.023405 #323] ERROR -- base-aws: Message: Running command resulted in failure: Expected process to exit with [0], but received '1'
+---- Begin output of terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures ----
+STDOUT: 
+STDERR: 2019/02/20 04:20:19 [INFO] Terraform version: 0.11.11  ac4fff416318bf0915a0ab80e062a99ef3724334
+2019/02/20 04:20:19 [INFO] Go runtime version: go1.11.1
+2019/02/20 04:20:19 [INFO] CLI args: []string{"/usr/local/bin/terraform", "init", "-input=false", "-lock=true", "-lock-timeout=0s", "-no-color", "-upgrade", "-force-copy", "-backend=true", "-get=true", "-get-plugins=true", "-verify-plugins=true", "/tmp/tests/test/fixtures"}
+2019/02/20 04:20:19 [DEBUG] Attempting to open CLI config file: /root/.terraformrc
+2019/02/20 04:20:19 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2019/02/20 04:20:19 [INFO] CLI command args: []string{"init", "-input=false", "-lock=true", "-lock-timeout=0s", "-no-color", "-upgrade", "-force-copy", "-backend=true", "-get=true", "-get-plugins=true", "-verify-plugins=true", "/tmp/tests/test/fixtures"}
+2019/02/20 04:20:19 [DEBUG] command: loading backend config file: /tmp/tests/test/fixtures
+There are some problems with the configuration, described below.
+
+The Terraform configuration must be valid before initialization so that
+Terraform can determine which modules and providers need to be installed.
+
+Error: Error parsing /tmp/tests/test/fixtures/provider.tf: object expected closing RBRACE got: EOF
+
+
+2019/02/20 04:20:19 [DEBUG] plugin: waiting for all plugin processes to complete...
+---- End output of terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures ----
+Ran terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures returned 1
+E, [2019-02-20T04:20:20.023772 #323] ERROR -- base-aws: ----------------------
+E, [2019-02-20T04:20:20.024103 #323] ERROR -- base-aws: ------Backtrace-------
+E, [2019-02-20T04:20:20.024432 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/kitchen-terraform-3.3.1/lib/kitchen/driver/terraform.rb:264:in `rescue in create'
+E, [2019-02-20T04:20:20.024980 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/kitchen-terraform-3.3.1/lib/kitchen/driver/terraform.rb:260:in `create'
+E, [2019-02-20T04:20:20.025302 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `public_send'
+E, [2019-02-20T04:20:20.025618 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `block in perform_action'
+E, [2019-02-20T04:20:20.025935 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:551:in `synchronize_or_call'
+E, [2019-02-20T04:20:20.026261 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:513:in `block in action'
+E, [2019-02-20T04:20:20.026649 #323] ERROR -- base-aws: /usr/lib/ruby/2.5.0/benchmark.rb:293:in `measure'
+E, [2019-02-20T04:20:20.026970 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:512:in `action'
+E, [2019-02-20T04:20:20.027356 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `perform_action'
+E, [2019-02-20T04:20:20.027906 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:394:in `create_action'
+E, [2019-02-20T04:20:20.028295 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:382:in `block (2 levels) in transition_to'
+E, [2019-02-20T04:20:20.028617 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/lifecycle_hooks.rb:45:in `run_with_hooks'
+E, [2019-02-20T04:20:20.028939 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:381:in `block in transition_to'
+E, [2019-02-20T04:20:20.029248 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:380:in `each'
+E, [2019-02-20T04:20:20.029569 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:380:in `transition_to'
+E, [2019-02-20T04:20:20.029882 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:140:in `converge'
+E, [2019-02-20T04:20:20.030193 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:197:in `public_send'
+E, [2019-02-20T04:20:20.030510 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:197:in `run_action_in_thread'
+E, [2019-02-20T04:20:20.030896 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:169:in `block (2 levels) in run_action'
+E, [2019-02-20T04:20:20.031208 #323] ERROR -- base-aws: ----End Backtrace-----
+E, [2019-02-20T04:20:20.031522 #323] ERROR -- base-aws: ---Nested Exception---
+E, [2019-02-20T04:20:20.031862 #323] ERROR -- base-aws: Class: Kitchen::Terraform::Error
+E, [2019-02-20T04:20:20.032258 #323] ERROR -- base-aws: Message: Running command resulted in failure: Expected process to exit with [0], but received '1'
+---- Begin output of terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures ----
+STDOUT: 
+STDERR: 2019/02/20 04:20:19 [INFO] Terraform version: 0.11.11  ac4fff416318bf0915a0ab80e062a99ef3724334
+2019/02/20 04:20:19 [INFO] Go runtime version: go1.11.1
+2019/02/20 04:20:19 [INFO] CLI args: []string{"/usr/local/bin/terraform", "init", "-input=false", "-lock=true", "-lock-timeout=0s", "-no-color", "-upgrade", "-force-copy", "-backend=true", "-get=true", "-get-plugins=true", "-verify-plugins=true", "/tmp/tests/test/fixtures"}
+2019/02/20 04:20:19 [DEBUG] Attempting to open CLI config file: /root/.terraformrc
+2019/02/20 04:20:19 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2019/02/20 04:20:19 [INFO] CLI command args: []string{"init", "-input=false", "-lock=true", "-lock-timeout=0s", "-no-color", "-upgrade", "-force-copy", "-backend=true", "-get=true", "-get-plugins=true", "-verify-plugins=true", "/tmp/tests/test/fixtures"}
+2019/02/20 04:20:19 [DEBUG] command: loading backend config file: /tmp/tests/test/fixtures
+There are some problems with the configuration, described below.
+
+The Terraform configuration must be valid before initialization so that
+Terraform can determine which modules and providers need to be installed.
+
+Error: Error parsing /tmp/tests/test/fixtures/provider.tf: object expected closing RBRACE got: EOF
+
+
+2019/02/20 04:20:19 [DEBUG] plugin: waiting for all plugin processes to complete...
+---- End output of terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures ----
+Ran terraform init -input=false -lock=true -lock-timeout=0s -no-color -upgrade -force-copy -backend=true  -get=true -get-plugins=true  -verify-plugins=true /tmp/tests/test/fixtures returned 1
+E, [2019-02-20T04:20:20.035040 #323] ERROR -- base-aws: ----------------------
+E, [2019-02-20T04:20:20.035394 #323] ERROR -- base-aws: ------Backtrace-------
+E, [2019-02-20T04:20:20.035712 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/kitchen-terraform-3.3.1/lib/kitchen/driver/terraform.rb:264:in `rescue in create'
+E, [2019-02-20T04:20:20.036033 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/kitchen-terraform-3.3.1/lib/kitchen/driver/terraform.rb:260:in `create'
+E, [2019-02-20T04:20:20.036363 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `public_send'
+E, [2019-02-20T04:20:20.036710 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `block in perform_action'
+E, [2019-02-20T04:20:20.037036 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:551:in `synchronize_or_call'
+E, [2019-02-20T04:20:20.037356 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:513:in `block in action'
+E, [2019-02-20T04:20:20.037714 #323] ERROR -- base-aws: /usr/lib/ruby/2.5.0/benchmark.rb:293:in `measure'
+E, [2019-02-20T04:20:20.041985 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:512:in `action'
+E, [2019-02-20T04:20:20.042438 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:484:in `perform_action'
+E, [2019-02-20T04:20:20.042832 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:394:in `create_action'
+E, [2019-02-20T04:20:20.043273 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:382:in `block (2 levels) in transition_to'
+E, [2019-02-20T04:20:20.043612 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/lifecycle_hooks.rb:45:in `run_with_hooks'
+E, [2019-02-20T04:20:20.044051 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:381:in `block in transition_to'
+E, [2019-02-20T04:20:20.044370 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:380:in `each'
+E, [2019-02-20T04:20:20.044693 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:380:in `transition_to'
+E, [2019-02-20T04:20:20.045020 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/instance.rb:140:in `converge'
+E, [2019-02-20T04:20:20.045341 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:197:in `public_send'
+E, [2019-02-20T04:20:20.045657 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:197:in `run_action_in_thread'
+E, [2019-02-20T04:20:20.045974 #323] ERROR -- base-aws: /usr/lib/ruby/gems/2.5.0/gems/test-kitchen-1.24.0/lib/kitchen/command.rb:169:in `block (2 levels) in run_action'
+E, [2019-02-20T04:20:20.046290 #323] ERROR -- base-aws: ----End Backtrace-----
