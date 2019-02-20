@@ -52,7 +52,7 @@ RUN mkdir -p /var/log/supervisord/ \
   && mkdir -p /var/log/moto/
 
 # install moto_server
-ADD moto/. /moto/
+ADD /. /moto/
 WORKDIR /moto/
 RUN pip install ".[server]"
 
