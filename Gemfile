@@ -1,4 +1,4 @@
-ruby '2.4.5'
+ruby '2.5.2'
 
 source "https://rubygems.org/" do
   gem 'awspec', '~> 1.4.2'

@@ -21,10 +21,10 @@ RUN apk add dpkg-dev dpkg gcc gdbm-dev glib-dev libc-dev
 RUN apk add libffi libffi-dev libxml2 libxml2-dev libxslt
 RUN apk add libxslt-dev linux-headers make ncurses-dev openssl
 RUN apk add openssl-dev procps readline-dev
-RUN apk add ruby=2.4.5-r0
-RUN apk add ruby-dev=2.4.5-r0
-RUN apk add ruby-irb=2.4.5-r0
-RUN apk add ruby-rdoc=2.4.5-r0
+RUN apk add ruby=2.5.2-r0
+RUN apk add ruby-dev=2.5.2-r0
+RUN apk add ruby-irb=2.5.2-r0
+RUN apk add ruby-rdoc=2.5.2-r0
 #RUN apk add ruby-ri
 RUN apk add ruby-bundler
 RUN apk add ruby-rdoc wget
