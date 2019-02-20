@@ -21,7 +21,7 @@ node {
                    docker container ls --all
                    docker image list
                    echo "\${GITHUB_PASSWORD} | docker login --username="\${GITHUB_USERNAME} --password-stdin
-                   docker tag mymoto:mymoto:latest rubelw/mymoto:latest
+                   docker tag mymoto/mymoto:latest rubelw/mymoto:latest
 
 
                 """
