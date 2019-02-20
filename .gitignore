@@ -1,0 +1,8 @@
+build/*
+.idea
+.idea/*
+dist/*
+dist
+build
+moto.egg-info
+motmo.egg-info/*

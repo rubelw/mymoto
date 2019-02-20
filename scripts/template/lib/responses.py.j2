@@ -1,0 +1,17 @@
+from __future__ import unicode_literals
+from moto.core.responses import BaseResponse
+from .models import {{ escaped_service }}_backends
+import json
+
+
+class {{ service_class }}Response(BaseResponse):
+    SERVICE_NAME = '{{ service }}'
+    @property
+    def {{ escaped_service }}_backend(self):
+        return {{ escaped_service }}_backends[self.region]
+
+    # add methods from here
+
+
+# add templates from here
+

@@ -1,0 +1,12 @@
+version: '2.1'
+
+services:
+  localstack:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: mymoto/mymoto
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
