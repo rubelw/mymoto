@@ -7,15 +7,27 @@ node {
         checkout scm
     }
 
-    stage('build docker'){
+    withCredentials([[
+        $class : "UsernamePasswordMultiBinding",
+        credentialsId: 'dockercreds',
+        passwordVariable: 'GITHUB_PASSWORD',
+        usernameVariable: 'GITHUB_USERNAME'
+    ]]){
+        stage('build docker'){
 
-        sh """
+            sh """
 
-               docker-compose -f docker-compose.yml build
-               docker container ls --all
-               docker image list
-            """
+                   docker-compose -f docker-compose.yml build
+                   docker container ls --all
+                   docker image list
+                   echo "\${GITHUB_PASSWORD} | docker login --username="\${GITHUB_USERNAME} --password-stdin
+                   docker tag mymoto:mymoto:latest rubelw/mymoto:latest
+
+
+                """
+        }
     }
+
 
     stage('clean-up workspace'){
         step([$class: 'WsCleanup'])
