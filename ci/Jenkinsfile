@@ -16,7 +16,7 @@ node {
         stage('build docker'){
 
             sh """
-                   DATE=`date '%Y%m%d%H%M'`
+                   DATE=\$(date +"%Y%m%d%H%M")
                    docker-compose -f docker-compose.yml build
                    docker container ls --all
                    docker image list
