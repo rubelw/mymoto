@@ -1,47 +1,26 @@
+
 provider "aws" {
     region = "us-east-1"
     skip_credentials_validation = true
-    skip_metadata_api_check = true
-    s3_force_path_style = true
+    skip_metadata_api_check     = true
+    s3_force_path_style         = true
     skip_requesting_account_id = true
     skip_get_ec2_platforms = true
-    access_key = "mock_access_key"
-    secret_key = "mock_secret_key"
+    access_key                  = "mock_access_key"
+    secret_key                  = "mock_secret_key"
     endpoints {
-        acm = "http://localhost:5015"
-        apigateway = "http://localhost:5016"
-        autoscaling = "http://localhost:5017"
         cloudformation = "http://localhost:5001"
         cloudwatch = "http://localhost:5002"
-        #cognitoidentity = "http://locahost:5018"
-        #cognitoidp = "http://localhost:5019"
-        #datapipeline = "http://localhost:5020"
-        dynamodb = "http://localhost:5021"
-        #dynamodb2 = "http://localhost:5022"
         ec2 = "http://localhost:5003"
         cloudwatchevents = "http://localhost:5004"
-        #glacier = "http://localhost:5026"
         iam = "http://localhost:5005"
-        #iot = "http://localhost:5027"
-        #iotdata = "http://localhost:5028"
-        kinesis = "http://localhost:5029"
         kms = "http://localhost:5006"
         lambda = "http://localhost:5007"
-        cloudwatchlogs = "http://localhost:5013"
-        #organizations = "http://localhost:5030"
-        #polly = "http://localhost:5031"
-        rds = "http://localhost:5032"
-        #rds2 = "http://localhost:5033"
-        #redshift = "http://localhost:5034"
-        r53 = "http://localhost:5014"
         s3 = "http://localhost:5008"
-        #secretsmanager = "http://localhost:5035"
         #ses = "http://localhost:5009"
         sns = "http://localhost:5010"
         sqs = "http://localhost:5011"
-        ssm = "http://localhost:5036"
-        sts = "http://localhost:5012"
-        #swf = "http://localhost:5037"
-        #xray = "http://localhost:5038"
+        #sts = "http://localhost:5012"
+        cloudwatchlogs = "http://localhost:5013"
     }
 }
