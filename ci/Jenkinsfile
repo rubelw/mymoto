@@ -23,7 +23,7 @@ node {
                    CONTAINER_ID=\$(docker images | grep 'moto\\s*latest' | awk '{print \$3}')
                    echo "Container id: \${CONTAINER_ID}"
                    echo "\${GITHUB_PASSWORD}" | docker login --username="\${GITHUB_USERNAME}" --password-stdin
-                   docker tag \$CONTAINER_ID:\$DATE rubelw/mymoto:\$DATE
+                   docker tag mymoto:latest rubelw/mymoto:\$DATE
                    docker push rubelw/mymoto
                 """
         }
