@@ -1,12 +1,12 @@
 provider "aws" {
     region = "us-east-1"
     skip_credentials_validation = true
-    skip_metadata_api_check     = true
-    s3_force_path_style         = true
+    skip_metadata_api_check = true
+    s3_force_path_style = true
     skip_requesting_account_id = true
     skip_get_ec2_platforms = true
-    access_key                  = "mock_access_key"
-    secret_key                  = "mock_secret_key"
+    access_key = "mock_access_key"
+    secret_key = "mock_secret_key"
     endpoints {
         acm = "http://localhost:5015"
         apigateway = "http://localhost:5016"
@@ -19,7 +19,7 @@ provider "aws" {
         dynamodb = "http://localhost:5021"
         #dynamodb2 = "http://localhost:5022"
         ec2 = "http://localhost:5003"
-        events = "http://localhost:5004"
+        cloudwatchevents = "http://localhost:5004"
         #glacier = "http://localhost:5026"
         iam = "http://localhost:5005"
         #iot = "http://localhost:5027"
@@ -35,7 +35,7 @@ provider "aws" {
         #redshift = "http://localhost:5034"
         r53 = "http://localhost:5014"
         s3 = "http://localhost:5008"
-        secretsmanager = "http://localhost:5035"
+        #secretsmanager = "http://localhost:5035"
         #ses = "http://localhost:5009"
         sns = "http://localhost:5010"
         sqs = "http://localhost:5011"
@@ -44,3 +44,4 @@ provider "aws" {
         #swf = "http://localhost:5037"
         #xray = "http://localhost:5038"
     }
+}
