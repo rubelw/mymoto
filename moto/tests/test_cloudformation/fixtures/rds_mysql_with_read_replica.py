@@ -66,7 +66,7 @@ template = {
         },
 
         "MultiAZ": {
-            "Description": "Multi-AZ master database",
+            "Description": "Multi-AZ main database",
             "Type": "String",
             "Default": "false",
             "AllowedValues": ["true", "false"],
@@ -132,7 +132,7 @@ template = {
             }
         },
 
-        "MasterDB": {
+        "MainDB": {
             "Type": "AWS::RDS::DBInstance",
             "Properties": {
                 "DBInstanceIdentifier": {"Ref": "DBInstanceIdentifier"},
@@ -141,10 +141,10 @@ template = {
                 "DBInstanceClass": {"Ref": "DBInstanceClass"},
                 "Engine": "MySQL",
                 "DBSubnetGroupName": {"Fn::If": ["Is-EC2-VPC", {"Ref": "DBSubnet"}, {"Ref": "AWS::NoValue"}]},
-                "MasterUsername": {"Ref": "DBUser"},
-                "MasterUserPassword": {"Ref": "DBPassword"},
+                "MainUsername": {"Ref": "DBUser"},
+                "MainUserPassword": {"Ref": "DBPassword"},
                 "MultiAZ": {"Ref": "MultiAZ"},
-                "Tags": [{"Key": "Name", "Value": "Master Database"}],
+                "Tags": [{"Key": "Name", "Value": "Main Database"}],
                 "VPCSecurityGroups": {"Fn::If": ["Is-EC2-VPC", [{"Fn::GetAtt": ["DBEC2SecurityGroup", "GroupId"]}], {"Ref": "AWS::NoValue"}]},
                 "DBSecurityGroups": {"Fn::If": ["Is-EC2-Classic", [{"Ref": "DBSecurityGroup"}], {"Ref": "AWS::NoValue"}]}
             },
@@ -154,7 +154,7 @@ template = {
         "ReplicaDB": {
             "Type": "AWS::RDS::DBInstance",
             "Properties": {
-                "SourceDBInstanceIdentifier": {"Ref": "MasterDB"},
+                "SourceDBInstanceIdentifier": {"Ref": "MainDB"},
                 "DBInstanceClass": {"Ref": "DBInstanceClass"},
                 "Tags": [{"Key": "Name", "Value": "Read Replica Database"}]
             }
@@ -167,14 +167,14 @@ template = {
             "Value": {"Fn::If": ["Is-EC2-VPC", "EC2-VPC", "EC2-Classic"]}
         },
 
-        "MasterJDBCConnectionString": {
-            "Description": "JDBC connection string for the master database",
+        "MainJDBCConnectionString": {
+            "Description": "JDBC connection string for the main database",
             "Value": {"Fn::Join": ["", ["jdbc:mysql://",
                                         {"Fn::GetAtt": [
-                                            "MasterDB", "Endpoint.Address"]},
+                                            "MainDB", "Endpoint.Address"]},
                                         ":",
                                         {"Fn::GetAtt": [
-                                            "MasterDB", "Endpoint.Port"]},
+                                            "MainDB", "Endpoint.Port"]},
                                         "/",
                                         {"Ref": "DBName"}]]}
         },

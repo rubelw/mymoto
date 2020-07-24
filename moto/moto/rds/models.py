@@ -32,8 +32,8 @@ class Database(BaseModel):
         else:
             self.kms_key_id = kwargs.get("kms_key_id")
         self.storage_type = kwargs.get("storage_type")
-        self.master_username = kwargs.get('master_username')
-        self.master_password = kwargs.get('master_password')
+        self.main_username = kwargs.get('main_username')
+        self.main_password = kwargs.get('main_password')
         self.auto_minor_version_upgrade = kwargs.get(
             'auto_minor_version_upgrade')
         if self.auto_minor_version_upgrade is None:
@@ -136,8 +136,8 @@ class Database(BaseModel):
             "engine_version": properties.get("EngineVersion"),
             "iops": properties.get("Iops"),
             "kms_key_id": properties.get("KmsKeyId"),
-            "master_password": properties.get('MasterUserPassword'),
-            "master_username": properties.get('MasterUsername'),
+            "main_password": properties.get('MainUserPassword'),
+            "main_username": properties.get('MainUsername'),
             "multi_az": properties.get("MultiAZ"),
             "port": properties.get('Port', 3306),
             "publicly_accessible": properties.get("PubliclyAccessible"),
@@ -237,7 +237,7 @@ class Database(BaseModel):
               {% endif %}
               <DBInstanceClass>{{ database.db_instance_class }}</DBInstanceClass>
               <InstanceCreateTime>{{ database.instance_create_time }}</InstanceCreateTime>
-              <MasterUsername>{{ database.master_username }}</MasterUsername>
+              <MainUsername>{{ database.main_username }}</MainUsername>
               <Endpoint>
                 <Address>{{ database.address }}</Address>
                 <Port>{{ database.port }}</Port>

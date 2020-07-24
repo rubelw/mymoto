@@ -15,8 +15,8 @@ class FakeOrganization(BaseModel):
         self.id = utils.make_random_org_id()
         self.root_id = utils.make_random_root_id()
         self.feature_set = feature_set
-        self.master_account_id = utils.MASTER_ACCOUNT_ID
-        self.master_account_email = utils.MASTER_ACCOUNT_EMAIL
+        self.main_account_id = utils.MASTER_ACCOUNT_ID
+        self.main_account_email = utils.MASTER_ACCOUNT_EMAIL
         self.available_policy_types = [{
             'Type': 'SERVICE_CONTROL_POLICY',
             'Status': 'ENABLED'
@@ -24,11 +24,11 @@ class FakeOrganization(BaseModel):
 
     @property
     def arn(self):
-        return utils.ORGANIZATION_ARN_FORMAT.format(self.master_account_id, self.id)
+        return utils.ORGANIZATION_ARN_FORMAT.format(self.main_account_id, self.id)
 
     @property
-    def master_account_arn(self):
-        return utils.MASTER_ACCOUNT_ARN_FORMAT.format(self.master_account_id, self.id)
+    def main_account_arn(self):
+        return utils.MASTER_ACCOUNT_ARN_FORMAT.format(self.main_account_id, self.id)
 
     def describe(self):
         return {
@@ -36,9 +36,9 @@ class FakeOrganization(BaseModel):
                 'Id': self.id,
                 'Arn': self.arn,
                 'FeatureSet': self.feature_set,
-                'MasterAccountArn': self.master_account_arn,
-                'MasterAccountId': self.master_account_id,
-                'MasterAccountEmail': self.master_account_email,
+                'MainAccountArn': self.main_account_arn,
+                'MainAccountId': self.main_account_id,
+                'MainAccountEmail': self.main_account_email,
                 'AvailablePolicyTypes': self.available_policy_types,
             }
         }
@@ -48,7 +48,7 @@ class FakeAccount(BaseModel):
 
     def __init__(self, organization, **kwargs):
         self.organization_id = organization.id
-        self.master_account_id = organization.master_account_id
+        self.main_account_id = organization.main_account_id
         self.create_account_status_id = utils.make_random_create_account_status_id()
         self.id = utils.make_random_account_id()
         self.name = kwargs['AccountName']
@@ -61,7 +61,7 @@ class FakeAccount(BaseModel):
     @property
     def arn(self):
         return utils.ACCOUNT_ARN_FORMAT.format(
-            self.master_account_id,
+            self.main_account_id,
             self.organization_id,
             self.id
         )
@@ -98,7 +98,7 @@ class FakeOrganizationalUnit(BaseModel):
     def __init__(self, organization, **kwargs):
         self.type = 'ORGANIZATIONAL_UNIT'
         self.organization_id = organization.id
-        self.master_account_id = organization.master_account_id
+        self.main_account_id = organization.main_account_id
         self.id = utils.make_random_ou_id(organization.root_id)
         self.name = kwargs.get('Name')
         self.parent_id = kwargs.get('ParentId')
@@ -107,7 +107,7 @@ class FakeOrganizationalUnit(BaseModel):
     @property
     def arn(self):
         return self._arn_format.format(
-            self.master_account_id,
+            self.main_account_id,
             self.organization_id,
             self.id
         )

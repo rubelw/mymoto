@@ -9,28 +9,28 @@ from moto import mock_ec2, mock_kms, mock_rds2
 @mock_rds2
 def test_create_database():
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='postgres',
                                        DBName='staging-postgres',
                                        DBInstanceClass='db.m1.small',
                                        LicenseModel='license-included',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234,
                                        DBSecurityGroups=["my_sg"])
     db_instance = database['DBInstance']
     db_instance['AllocatedStorage'].should.equal(10)
     db_instance['DBInstanceClass'].should.equal("db.m1.small")
     db_instance['LicenseModel'].should.equal("license-included")
-    db_instance['MasterUsername'].should.equal("root")
+    db_instance['MainUsername'].should.equal("root")
     db_instance['DBSecurityGroups'][0][
         'DBSecurityGroupName'].should.equal('my_sg')
     db_instance['DBInstanceArn'].should.equal(
-        'arn:aws:rds:us-west-2:1234567890:db:db-master-1')
+        'arn:aws:rds:us-west-2:1234567890:db:db-main-1')
     db_instance['DBInstanceStatus'].should.equal('available')
     db_instance['DBName'].should.equal('staging-postgres')
-    db_instance['DBInstanceIdentifier'].should.equal("db-master-1")
+    db_instance['DBInstanceIdentifier'].should.equal("db-main-1")
     db_instance['IAMDatabaseAuthenticationEnabled'].should.equal(False)
     db_instance['DbiResourceId'].should.contain("db-")
     db_instance['CopyTagsToSnapshot'].should.equal(False)
@@ -39,14 +39,14 @@ def test_create_database():
 @mock_rds2
 def test_stop_database():
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='postgres',
                                        DBName='staging-postgres',
                                        DBInstanceClass='db.m1.small',
                                        LicenseModel='license-included',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234,
                                        DBSecurityGroups=["my_sg"])
     mydb = conn.describe_db_instances(DBInstanceIdentifier=database['DBInstance']['DBInstanceIdentifier'])['DBInstances'][0]
@@ -66,14 +66,14 @@ def test_stop_database():
 @mock_rds2
 def test_start_database():
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='postgres',
                                        DBName='staging-postgres',
                                        DBInstanceClass='db.m1.small',
                                        LicenseModel='license-included',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234,
                                        DBSecurityGroups=["my_sg"])
     mydb = conn.describe_db_instances(DBInstanceIdentifier=database['DBInstance']['DBInstanceIdentifier'])['DBInstances'][0]
@@ -103,14 +103,14 @@ def test_start_database():
 @mock_rds2
 def test_fail_to_stop_multi_az():
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='postgres',
                                        DBName='staging-postgres',
                                        DBInstanceClass='db.m1.small',
                                        LicenseModel='license-included',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234,
                                        DBSecurityGroups=["my_sg"],
                                        MultiAZ=True)
@@ -126,19 +126,19 @@ def test_fail_to_stop_multi_az():
 @mock_rds2
 def test_fail_to_stop_readreplica():
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='postgres',
                                        DBName='staging-postgres',
                                        DBInstanceClass='db.m1.small',
                                        LicenseModel='license-included',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234,
                                        DBSecurityGroups=["my_sg"])
 
     replica = conn.create_db_instance_read_replica(DBInstanceIdentifier="db-replica-1",
-                                                   SourceDBInstanceIdentifier="db-master-1",
+                                                   SourceDBInstanceIdentifier="db-main-1",
                                                    DBInstanceClass="db.m1.small")
 
     mydb = conn.describe_db_instances(DBInstanceIdentifier=replica['DBInstance']['DBInstanceIdentifier'])['DBInstances'][0]
@@ -156,31 +156,31 @@ def test_get_databases():
     instances = conn.describe_db_instances()
     list(instances['DBInstances']).should.have.length_of(0)
 
-    conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                             AllocatedStorage=10,
                             DBInstanceClass='postgres',
                             Engine='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=['my_sg'])
-    conn.create_db_instance(DBInstanceIdentifier='db-master-2',
+    conn.create_db_instance(DBInstanceIdentifier='db-main-2',
                             AllocatedStorage=10,
                             DBInstanceClass='postgres',
                             Engine='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=['my_sg'])
     instances = conn.describe_db_instances()
     list(instances['DBInstances']).should.have.length_of(2)
 
-    instances = conn.describe_db_instances(DBInstanceIdentifier="db-master-1")
+    instances = conn.describe_db_instances(DBInstanceIdentifier="db-main-1")
     list(instances['DBInstances']).should.have.length_of(1)
     instances['DBInstances'][0][
-        'DBInstanceIdentifier'].should.equal("db-master-1")
+        'DBInstanceIdentifier'].should.equal("db-main-1")
     instances['DBInstances'][0]['DBInstanceArn'].should.equal(
-        'arn:aws:rds:us-west-2:1234567890:db:db-master-1')
+        'arn:aws:rds:us-west-2:1234567890:db:db-main-1')
 
 
 @mock_rds2
@@ -214,42 +214,42 @@ def test_describe_non_existant_database():
 @mock_rds2
 def test_modify_db_instance():
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        DBInstanceClass='postgres',
                                        Engine='db.m1.small',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234,
                                        DBSecurityGroups=['my_sg'])
-    instances = conn.describe_db_instances(DBInstanceIdentifier='db-master-1')
+    instances = conn.describe_db_instances(DBInstanceIdentifier='db-main-1')
     instances['DBInstances'][0]['AllocatedStorage'].should.equal(10)
-    conn.modify_db_instance(DBInstanceIdentifier='db-master-1',
+    conn.modify_db_instance(DBInstanceIdentifier='db-main-1',
                             AllocatedStorage=20,
                             ApplyImmediately=True)
-    instances = conn.describe_db_instances(DBInstanceIdentifier='db-master-1')
+    instances = conn.describe_db_instances(DBInstanceIdentifier='db-main-1')
     instances['DBInstances'][0]['AllocatedStorage'].should.equal(20)
 
 
 @mock_rds2
 def test_rename_db_instance():
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        DBInstanceClass='postgres',
                                        Engine='db.m1.small',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234,
                                        DBSecurityGroups=['my_sg'])
-    instances = conn.describe_db_instances(DBInstanceIdentifier="db-master-1")
+    instances = conn.describe_db_instances(DBInstanceIdentifier="db-main-1")
     list(instances['DBInstances']).should.have.length_of(1)
-    conn.describe_db_instances.when.called_with(DBInstanceIdentifier="db-master-2").should.throw(ClientError)
-    conn.modify_db_instance(DBInstanceIdentifier='db-master-1',
-                            NewDBInstanceIdentifier='db-master-2',
+    conn.describe_db_instances.when.called_with(DBInstanceIdentifier="db-main-2").should.throw(ClientError)
+    conn.modify_db_instance(DBInstanceIdentifier='db-main-1',
+                            NewDBInstanceIdentifier='db-main-2',
                             ApplyImmediately=True)
-    conn.describe_db_instances.when.called_with(DBInstanceIdentifier="db-master-1").should.throw(ClientError)
-    instances = conn.describe_db_instances(DBInstanceIdentifier="db-master-2")
+    conn.describe_db_instances.when.called_with(DBInstanceIdentifier="db-main-1").should.throw(ClientError)
+    instances = conn.describe_db_instances(DBInstanceIdentifier="db-main-2")
     list(instances['DBInstances']).should.have.length_of(1)
 
 
@@ -264,16 +264,16 @@ def test_modify_non_existant_database():
 @mock_rds2
 def test_reboot_db_instance():
     conn = boto3.client('rds', region_name='us-west-2')
-    conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                             AllocatedStorage=10,
                             DBInstanceClass='postgres',
                             Engine='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=['my_sg'])
-    database = conn.reboot_db_instance(DBInstanceIdentifier='db-master-1')
-    database['DBInstance']['DBInstanceIdentifier'].should.equal("db-master-1")
+    database = conn.reboot_db_instance(DBInstanceIdentifier='db-main-1')
+    database['DBInstance']['DBInstanceIdentifier'].should.equal("db-main-1")
 
 
 @mock_rds2
@@ -292,8 +292,8 @@ def test_delete_database():
                             AllocatedStorage=10,
                             Engine='postgres',
                             DBInstanceClass='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=['my_sg'])
     instances = conn.describe_db_instances()
@@ -329,8 +329,8 @@ def test_create_db_snapshots():
                             Engine='postgres',
                             DBName='staging-postgres',
                             DBInstanceClass='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=["my_sg"])
 
@@ -356,8 +356,8 @@ def test_create_db_snapshots_copy_tags():
                             Engine='postgres',
                             DBName='staging-postgres',
                             DBInstanceClass='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=["my_sg"],
                             CopyTagsToSnapshot=True,
@@ -393,8 +393,8 @@ def test_describe_db_snapshots():
                             Engine='postgres',
                             DBName='staging-postgres',
                             DBInstanceClass='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=["my_sg"])
 
@@ -425,8 +425,8 @@ def test_delete_db_snapshot():
                             Engine='postgres',
                             DBName='staging-postgres',
                             DBInstanceClass='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=["my_sg"])
     conn.create_db_snapshot(DBInstanceIdentifier='db-primary-1',
@@ -607,8 +607,8 @@ def test_list_tags_db():
         AllocatedStorage=10,
         DBInstanceClass='postgres',
         Engine='db.m1.small',
-        MasterUsername='root',
-        MasterUserPassword='hunter2',
+        MainUsername='root',
+        MainUserPassword='hunter2',
         Port=1234,
         DBSecurityGroups=['my_sg'],
         Tags=[
@@ -636,8 +636,8 @@ def test_add_tags_db():
                             AllocatedStorage=10,
                             DBInstanceClass='postgres',
                             Engine='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=['my_sg'],
                             Tags=[
@@ -676,8 +676,8 @@ def test_remove_tags_db():
                             AllocatedStorage=10,
                             DBInstanceClass='postgres',
                             Engine='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=['my_sg'],
                             Tags=[
@@ -711,8 +711,8 @@ def test_list_tags_snapshot():
                             Engine='postgres',
                             DBName='staging-postgres',
                             DBInstanceClass='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=["my_sg"])
     snapshot = conn.create_db_snapshot(DBInstanceIdentifier='db-primary-1',
@@ -742,8 +742,8 @@ def test_add_tags_snapshot():
                             Engine='postgres',
                             DBName='staging-postgres',
                             DBInstanceClass='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=["my_sg"])
     snapshot = conn.create_db_snapshot(DBInstanceIdentifier='db-primary-1',
@@ -785,8 +785,8 @@ def test_remove_tags_snapshot():
                             Engine='postgres',
                             DBName='staging-postgres',
                             DBInstanceClass='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSecurityGroups=["my_sg"])
     snapshot = conn.create_db_snapshot(DBInstanceIdentifier='db-primary-1',
@@ -954,19 +954,19 @@ def test_security_group_authorize():
 def test_add_security_group_to_database():
     conn = boto3.client('rds', region_name='us-west-2')
 
-    conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                             AllocatedStorage=10,
                             DBInstanceClass='postgres',
                             Engine='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234)
 
     result = conn.describe_db_instances()
     result['DBInstances'][0]['DBSecurityGroups'].should.equal([])
     conn.create_db_security_group(DBSecurityGroupName='db_sg',
                                   DBSecurityGroupDescription='DB Security Group')
-    conn.modify_db_instance(DBInstanceIdentifier='db-master-1',
+    conn.modify_db_instance(DBInstanceIdentifier='db-main-1',
                             DBSecurityGroups=['db_sg'])
     result = conn.describe_db_instances()
     result['DBInstances'][0]['DBSecurityGroups'][0][
@@ -1075,15 +1075,15 @@ def test_create_database_in_subnet_group():
     conn.create_db_subnet_group(DBSubnetGroupName='db_subnet1',
                                 DBSubnetGroupDescription='my db subnet',
                                 SubnetIds=[subnet['SubnetId']])
-    conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                             AllocatedStorage=10,
                             Engine='postgres',
                             DBInstanceClass='db.m1.small',
-                            MasterUsername='root',
-                            MasterUserPassword='hunter2',
+                            MainUsername='root',
+                            MainUserPassword='hunter2',
                             Port=1234,
                             DBSubnetGroupName='db_subnet1')
-    result = conn.describe_db_instances(DBInstanceIdentifier='db-master-1')
+    result = conn.describe_db_instances(DBInstanceIdentifier='db-main-1')
     result['DBInstances'][0]['DBSubnetGroup'][
         'DBSubnetGroupName'].should.equal('db_subnet1')
 
@@ -1232,32 +1232,32 @@ def test_remove_tags_database_subnet_group():
 def test_create_database_replica():
     conn = boto3.client('rds', region_name='us-west-2')
 
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='postgres',
                                        DBInstanceClass='db.m1.small',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234,
                                        DBSecurityGroups=["my_sg"])
 
     replica = conn.create_db_instance_read_replica(DBInstanceIdentifier="db-replica-1",
-                                                   SourceDBInstanceIdentifier="db-master-1",
+                                                   SourceDBInstanceIdentifier="db-main-1",
                                                    DBInstanceClass="db.m1.small")
     replica['DBInstance'][
-        'ReadReplicaSourceDBInstanceIdentifier'].should.equal('db-master-1')
+        'ReadReplicaSourceDBInstanceIdentifier'].should.equal('db-main-1')
     replica['DBInstance']['DBInstanceClass'].should.equal('db.m1.small')
     replica['DBInstance']['DBInstanceIdentifier'].should.equal('db-replica-1')
 
-    master = conn.describe_db_instances(DBInstanceIdentifier="db-master-1")
-    master['DBInstances'][0]['ReadReplicaDBInstanceIdentifiers'].should.equal([
+    main = conn.describe_db_instances(DBInstanceIdentifier="db-main-1")
+    main['DBInstances'][0]['ReadReplicaDBInstanceIdentifiers'].should.equal([
                                                                               'db-replica-1'])
 
     conn.delete_db_instance(
         DBInstanceIdentifier="db-replica-1", SkipFinalSnapshot=True)
 
-    master = conn.describe_db_instances(DBInstanceIdentifier="db-master-1")
-    master['DBInstances'][0][
+    main = conn.describe_db_instances(DBInstanceIdentifier="db-main-1")
+    main['DBInstances'][0][
         'ReadReplicaDBInstanceIdentifiers'].should.equal([])
 
 
@@ -1270,12 +1270,12 @@ def test_create_database_with_encrypted_storage():
                               KeyUsage='ENCRYPT_DECRYPT')
 
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='postgres',
                                        DBInstanceClass='db.m1.small',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234,
                                        DBSecurityGroups=["my_sg"],
                                        StorageEncrypted=True,
@@ -1308,13 +1308,13 @@ def test_create_db_instance_with_parameter_group():
                                                         DBParameterGroupFamily='mysql5.6',
                                                         Description='test parameter group')
 
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='mysql',
                                        DBInstanceClass='db.m1.small',
                                        DBParameterGroupName='test',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234)
 
     len(database['DBInstance']['DBParameterGroups']).should.equal(1)
@@ -1327,12 +1327,12 @@ def test_create_db_instance_with_parameter_group():
 @mock_rds2
 def test_create_database_with_default_port():
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='postgres',
                                        DBInstanceClass='db.m1.small',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        DBSecurityGroups=["my_sg"])
     database['DBInstance']['Endpoint']['Port'].should.equal(5432)
 
@@ -1340,12 +1340,12 @@ def test_create_database_with_default_port():
 @mock_rds2
 def test_modify_db_instance_with_parameter_group():
     conn = boto3.client('rds', region_name='us-west-2')
-    database = conn.create_db_instance(DBInstanceIdentifier='db-master-1',
+    database = conn.create_db_instance(DBInstanceIdentifier='db-main-1',
                                        AllocatedStorage=10,
                                        Engine='mysql',
                                        DBInstanceClass='db.m1.small',
-                                       MasterUsername='root',
-                                       MasterUserPassword='hunter2',
+                                       MainUsername='root',
+                                       MainUserPassword='hunter2',
                                        Port=1234)
 
     len(database['DBInstance']['DBParameterGroups']).should.equal(1)
@@ -1357,12 +1357,12 @@ def test_modify_db_instance_with_parameter_group():
     db_parameter_group = conn.create_db_parameter_group(DBParameterGroupName='test',
                                                         DBParameterGroupFamily='mysql5.6',
                                                         Description='test parameter group')
-    conn.modify_db_instance(DBInstanceIdentifier='db-master-1',
+    conn.modify_db_instance(DBInstanceIdentifier='db-main-1',
                             DBParameterGroupName='test',
                             ApplyImmediately=True)
 
     database = conn.describe_db_instances(
-        DBInstanceIdentifier='db-master-1')['DBInstances'][0]
+        DBInstanceIdentifier='db-main-1')['DBInstances'][0]
     len(database['DBParameterGroups']).should.equal(1)
     database['DBParameterGroups'][0][
         'DBParameterGroupName'].should.equal('test')
