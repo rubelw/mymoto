@@ -31,8 +31,8 @@ class RDS2Response(BaseResponse):
             "license_model": self._get_param("LicenseModel"),
             "iops": self._get_int_param("Iops"),
             "kms_key_id": self._get_param("KmsKeyId"),
-            "master_user_password": self._get_param('MasterUserPassword'),
-            "master_username": self._get_param('MasterUsername'),
+            "main_user_password": self._get_param('MainUserPassword'),
+            "main_username": self._get_param('MainUsername'),
             "multi_az": self._get_bool_param("MultiAZ"),
             # OptionGroupName
             "port": self._get_param('Port'),

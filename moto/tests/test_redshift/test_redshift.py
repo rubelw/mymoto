@@ -30,8 +30,8 @@ def test_create_cluster_boto3():
         ClusterIdentifier='test',
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='user',
-        MasterUserPassword='password',
+        MainUsername='user',
+        MainUserPassword='password',
     )
     response['Cluster']['NodeType'].should.equal('ds2.xlarge')
     create_time = response['Cluster']['ClusterCreateTime']
@@ -85,8 +85,8 @@ def test_create_cluster():
     cluster_response = conn.create_cluster(
         cluster_identifier,
         node_type="dw.hs1.xlarge",
-        master_username="username",
-        master_user_password="password",
+        main_username="username",
+        main_user_password="password",
         db_name="my_db",
         cluster_type="multi-node",
         availability_zone="us-east-1d",
@@ -106,7 +106,7 @@ def test_create_cluster():
 
     cluster['ClusterIdentifier'].should.equal(cluster_identifier)
     cluster['NodeType'].should.equal("dw.hs1.xlarge")
-    cluster['MasterUsername'].should.equal("username")
+    cluster['MainUsername'].should.equal("username")
     cluster['DBName'].should.equal("my_db")
     cluster['ClusterSecurityGroups'][0][
         'ClusterSecurityGroupName'].should.equal("Default")
@@ -131,8 +131,8 @@ def test_create_single_node_cluster():
     conn.create_cluster(
         cluster_identifier,
         node_type="dw.hs1.xlarge",
-        master_username="username",
-        master_user_password="password",
+        main_username="username",
+        main_user_password="password",
         db_name="my_db",
         cluster_type="single-node",
     )
@@ -143,7 +143,7 @@ def test_create_single_node_cluster():
 
     cluster['ClusterIdentifier'].should.equal(cluster_identifier)
     cluster['NodeType'].should.equal("dw.hs1.xlarge")
-    cluster['MasterUsername'].should.equal("username")
+    cluster['MainUsername'].should.equal("username")
     cluster['DBName'].should.equal("my_db")
     cluster['NumberOfNodes'].should.equal(1)
 
@@ -156,8 +156,8 @@ def test_default_cluster_attributes():
     conn.create_cluster(
         cluster_identifier,
         node_type="dw.hs1.xlarge",
-        master_username="username",
-        master_user_password="password",
+        main_username="username",
+        main_user_password="password",
     )
 
     cluster_response = conn.describe_clusters(cluster_identifier)
@@ -193,8 +193,8 @@ def test_create_cluster_in_subnet_group():
     redshift_conn.create_cluster(
         "my_cluster",
         node_type="dw.hs1.xlarge",
-        master_username="username",
-        master_user_password="password",
+        main_username="username",
+        main_user_password="password",
         cluster_subnet_group_name='my_subnet_group',
     )
 
@@ -220,8 +220,8 @@ def test_create_cluster_in_subnet_group_boto3():
     client.create_cluster(
         ClusterIdentifier="my_cluster",
         NodeType="dw.hs1.xlarge",
-        MasterUsername="username",
-        MasterUserPassword="password",
+        MainUsername="username",
+        MainUserPassword="password",
         ClusterSubnetGroupName='my_subnet_group',
     )
 
@@ -246,8 +246,8 @@ def test_create_cluster_with_security_group():
     conn.create_cluster(
         cluster_identifier,
         node_type="dw.hs1.xlarge",
-        master_username="username",
-        master_user_password="password",
+        main_username="username",
+        main_user_password="password",
         cluster_security_groups=["security_group1", "security_group2"]
     )
 
@@ -275,8 +275,8 @@ def test_create_cluster_with_security_group_boto3():
     client.create_cluster(
         ClusterIdentifier=cluster_identifier,
         NodeType="dw.hs1.xlarge",
-        MasterUsername="username",
-        MasterUserPassword="password",
+        MainUsername="username",
+        MainUserPassword="password",
         ClusterSecurityGroups=["security_group1", "security_group2"]
     )
     response = client.describe_clusters(ClusterIdentifier=cluster_identifier)
@@ -299,8 +299,8 @@ def test_create_cluster_with_vpc_security_groups():
     redshift_conn.create_cluster(
         "my_cluster",
         node_type="dw.hs1.xlarge",
-        master_username="username",
-        master_user_password="password",
+        main_username="username",
+        main_user_password="password",
         vpc_security_group_ids=[security_group.id],
     )
 
@@ -326,8 +326,8 @@ def test_create_cluster_with_vpc_security_groups_boto3():
     client.create_cluster(
         ClusterIdentifier=cluster_id,
         NodeType="dw.hs1.xlarge",
-        MasterUsername="username",
-        MasterUserPassword="password",
+        MainUsername="username",
+        MainUserPassword="password",
         VpcSecurityGroupIds=[security_group.id],
     )
     response = client.describe_clusters(ClusterIdentifier=cluster_id)
@@ -345,8 +345,8 @@ def test_create_cluster_with_iam_roles():
     client.create_cluster(
         ClusterIdentifier=cluster_id,
         NodeType="dw.hs1.xlarge",
-        MasterUsername="username",
-        MasterUserPassword="password",
+        MainUsername="username",
+        MainUserPassword="password",
         IamRoles=iam_roles_arn
     )
     response = client.describe_clusters(ClusterIdentifier=cluster_id)
@@ -367,8 +367,8 @@ def test_create_cluster_with_parameter_group():
     conn.create_cluster(
         "my_cluster",
         node_type="dw.hs1.xlarge",
-        master_username="username",
-        master_user_password="password",
+        main_username="username",
+        main_user_password="password",
         cluster_parameter_group_name='my_parameter_group',
     )
 
@@ -394,8 +394,8 @@ def test_delete_cluster():
     conn.create_cluster(
         cluster_identifier,
         node_type='single-node',
-        master_username="username",
-        master_user_password="password",
+        main_username="username",
+        main_user_password="password",
     )
 
     clusters = conn.describe_clusters()['DescribeClustersResponse'][
@@ -430,8 +430,8 @@ def test_modify_cluster():
     conn.create_cluster(
         cluster_identifier,
         node_type='single-node',
-        master_username="username",
-        master_user_password="password",
+        main_username="username",
+        main_user_password="password",
     )
 
     conn.modify_cluster(
@@ -439,7 +439,7 @@ def test_modify_cluster():
         cluster_type="multi-node",
         node_type="dw.hs1.xlarge",
         cluster_security_groups="security_group",
-        master_user_password="new_password",
+        main_user_password="new_password",
         cluster_parameter_group_name="my_parameter_group",
         automated_snapshot_retention_period=7,
         preferred_maintenance_window="Tue:03:00-Tue:11:00",
@@ -665,8 +665,8 @@ def test_create_cluster_snapshot():
         ClusterIdentifier=cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
     )
     cluster_response['Cluster']['NodeType'].should.equal('ds2.xlarge')
 
@@ -681,7 +681,7 @@ def test_create_cluster_snapshot():
     snapshot['ClusterIdentifier'].should.equal(cluster_identifier)
     snapshot['NumberOfNodes'].should.equal(1)
     snapshot['NodeType'].should.equal('ds2.xlarge')
-    snapshot['MasterUsername'].should.equal('username')
+    snapshot['MainUsername'].should.equal('username')
 
 
 @mock_redshift
@@ -695,8 +695,8 @@ def test_describe_cluster_snapshots():
         ClusterIdentifier=cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
     )
 
     client.create_cluster_snapshot(
@@ -712,7 +712,7 @@ def test_describe_cluster_snapshots():
     snapshot['ClusterIdentifier'].should.equal(cluster_identifier)
     snapshot['NumberOfNodes'].should.equal(1)
     snapshot['NodeType'].should.equal('ds2.xlarge')
-    snapshot['MasterUsername'].should.equal('username')
+    snapshot['MainUsername'].should.equal('username')
 
 
 @mock_redshift
@@ -740,8 +740,8 @@ def test_delete_cluster_snapshot():
         ClusterIdentifier=cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
     )
     client.create_cluster_snapshot(
         SnapshotIdentifier=snapshot_identifier,
@@ -773,8 +773,8 @@ def test_cluster_snapshot_already_exists():
         ClusterIdentifier=cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
     )
 
     client.create_cluster_snapshot(
@@ -799,8 +799,8 @@ def test_create_cluster_from_snapshot():
         ClusterIdentifier=original_cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
     )
     client.create_cluster_snapshot(
         SnapshotIdentifier=original_snapshot_identifier,
@@ -818,7 +818,7 @@ def test_create_cluster_from_snapshot():
     )
     new_cluster = response['Clusters'][0]
     new_cluster['NodeType'].should.equal('ds2.xlarge')
-    new_cluster['MasterUsername'].should.equal('username')
+    new_cluster['MainUsername'].should.equal('username')
     new_cluster['Endpoint']['Port'].should.equal(1234)
 
 
@@ -833,8 +833,8 @@ def test_create_cluster_from_snapshot_with_waiter():
         ClusterIdentifier=original_cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
     )
     client.create_cluster_snapshot(
         SnapshotIdentifier=original_snapshot_identifier,
@@ -860,7 +860,7 @@ def test_create_cluster_from_snapshot_with_waiter():
     )
     new_cluster = response['Clusters'][0]
     new_cluster['NodeType'].should.equal('ds2.xlarge')
-    new_cluster['MasterUsername'].should.equal('username')
+    new_cluster['MainUsername'].should.equal('username')
     new_cluster['Endpoint']['Port'].should.equal(1234)
 
 
@@ -882,8 +882,8 @@ def test_create_cluster_status_update():
         ClusterIdentifier=cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
     )
     response['Cluster']['ClusterStatus'].should.equal('creating')
 
@@ -911,8 +911,8 @@ def test_describe_tags_with_resource_type():
         ClusterIdentifier=cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
         Tags=[{'Key': tag_key,
                'Value': tag_value}]
     )
@@ -970,8 +970,8 @@ def test_describe_tags_with_resource_name():
         ClusterIdentifier=cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
         Tags=[{'Key': tag_key,
                'Value': tag_value}]
     )
@@ -1020,8 +1020,8 @@ def test_create_tags():
         ClusterIdentifier=cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
     )
     client.create_tags(
         ResourceName=cluster_arn,
@@ -1053,8 +1053,8 @@ def test_delete_tags():
         ClusterIdentifier=cluster_identifier,
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='username',
-        MasterUserPassword='password',
+        MainUsername='username',
+        MainUserPassword='password',
         Tags=tags
     )
     client.delete_tags(
@@ -1096,8 +1096,8 @@ def test_describe_tags_all_resource_types():
         ClusterIdentifier='my_cluster',
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='user',
-        MasterUserPassword='password',
+        MainUsername='user',
+        MainUserPassword='password',
         Tags=[{'Key': 'tag_key',
                'Value': 'tag_value'}]
     )
@@ -1154,8 +1154,8 @@ def test_enable_snapshot_copy():
         ClusterType='single-node',
         DBName='test',
         Encrypted=True,
-        MasterUsername='user',
-        MasterUserPassword='password',
+        MainUsername='user',
+        MainUserPassword='password',
         NodeType='ds2.xlarge',
     )
     client.enable_snapshot_copy(
@@ -1178,8 +1178,8 @@ def test_enable_snapshot_copy_unencrypted():
         ClusterIdentifier='test',
         ClusterType='single-node',
         DBName='test',
-        MasterUsername='user',
-        MasterUserPassword='password',
+        MainUsername='user',
+        MainUserPassword='password',
         NodeType='ds2.xlarge',
     )
     client.enable_snapshot_copy(
@@ -1200,8 +1200,8 @@ def test_disable_snapshot_copy():
         ClusterIdentifier='test',
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='user',
-        MasterUserPassword='password',
+        MainUsername='user',
+        MainUserPassword='password',
     )
     client.enable_snapshot_copy(
         ClusterIdentifier='test',
@@ -1224,8 +1224,8 @@ def test_modify_snapshot_copy_retention_period():
         ClusterIdentifier='test',
         ClusterType='single-node',
         NodeType='ds2.xlarge',
-        MasterUsername='user',
-        MasterUserPassword='password',
+        MainUsername='user',
+        MainUserPassword='password',
     )
     client.enable_snapshot_copy(
         ClusterIdentifier='test',

@@ -129,14 +129,14 @@ def test_create_queue_kms():
     new_queue = sqs.create_queue(
         QueueName='test-queue',
         Attributes={
-            'KmsMasterKeyId': 'master-key-id',
+            'KmsMainKeyId': 'main-key-id',
             'KmsDataKeyReusePeriodSeconds': '600'
         })
     new_queue.should_not.be.none
 
     queue = sqs.get_queue_by_name(QueueName='test-queue')
 
-    queue.attributes.get('KmsMasterKeyId').should.equal('master-key-id')
+    queue.attributes.get('KmsMainKeyId').should.equal('main-key-id')
     queue.attributes.get('KmsDataKeyReusePeriodSeconds').should.equal('600')
 
 

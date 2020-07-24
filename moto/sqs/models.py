@@ -169,7 +169,7 @@ class Queue(BaseModel):
     fifo_attributes = ['FifoQueue',
                        'ContentBasedDeduplication']
     kms_attributes = ['KmsDataKeyReusePeriodSeconds',
-                      'KmsMasterKeyId']
+                      'KmsMainKeyId']
     ALLOWED_PERMISSIONS = ('*', 'ChangeMessageVisibility', 'DeleteMessage',
                            'GetQueueAttributes', 'GetQueueUrl',
                            'ReceiveMessage', 'SendMessage')
@@ -195,7 +195,7 @@ class Queue(BaseModel):
             'DelaySeconds': 0,
             'FifoQueue': 'false',
             'KmsDataKeyReusePeriodSeconds': 300,  # five minutes
-            'KmsMasterKeyId': None,
+            'KmsMainKeyId': None,
             'MaximumMessageSize': int(64 << 10),
             'MessageRetentionPeriod': 86400 * 4,  # four days
             'Policy': None,
@@ -334,7 +334,7 @@ class Queue(BaseModel):
                 attr = getattr(self, camelcase_to_underscores(attribute))
                 result[attribute] = attr
 
-        if self.kms_master_key_id:
+        if self.kms_main_key_id:
             for attribute in self.kms_attributes:
                 attr = getattr(self, camelcase_to_underscores(attribute))
                 result[attribute] = attr

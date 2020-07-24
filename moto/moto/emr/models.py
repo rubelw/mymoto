@@ -37,9 +37,9 @@ class FakeInstanceGroup(BaseModel):
         self.market = market
         if name is None:
             if instance_role == 'MASTER':
-                name = 'master'
+                name = 'main'
             elif instance_role == 'CORE':
-                name = 'slave'
+                name = 'subordinate'
             else:
                 name = 'Task instance group'
         self.name = name
@@ -122,40 +122,40 @@ class FakeCluster(BaseModel):
         self.set_visibility(visible_to_all_users)
 
         self.instance_group_ids = []
-        self.master_instance_group_id = None
+        self.main_instance_group_id = None
         self.core_instance_group_id = None
-        if 'master_instance_type' in instance_attrs and instance_attrs['master_instance_type']:
+        if 'main_instance_type' in instance_attrs and instance_attrs['main_instance_type']:
             self.emr_backend.add_instance_groups(
                 self.id,
                 [{'instance_count': 1,
                   'instance_role': 'MASTER',
-                  'instance_type': instance_attrs['master_instance_type'],
+                  'instance_type': instance_attrs['main_instance_type'],
                   'market': 'ON_DEMAND',
-                  'name': 'master'}])
-        if 'slave_instance_type' in instance_attrs and instance_attrs['slave_instance_type']:
+                  'name': 'main'}])
+        if 'subordinate_instance_type' in instance_attrs and instance_attrs['subordinate_instance_type']:
             self.emr_backend.add_instance_groups(
                 self.id,
                 [{'instance_count': instance_attrs['instance_count'] - 1,
                   'instance_role': 'CORE',
-                  'instance_type': instance_attrs['slave_instance_type'],
+                  'instance_type': instance_attrs['subordinate_instance_type'],
                   'market': 'ON_DEMAND',
-                  'name': 'slave'}])
-        self.additional_master_security_groups = instance_attrs.get(
-            'additional_master_security_groups')
-        self.additional_slave_security_groups = instance_attrs.get(
-            'additional_slave_security_groups')
+                  'name': 'subordinate'}])
+        self.additional_main_security_groups = instance_attrs.get(
+            'additional_main_security_groups')
+        self.additional_subordinate_security_groups = instance_attrs.get(
+            'additional_subordinate_security_groups')
         self.availability_zone = instance_attrs.get('availability_zone')
         self.ec2_key_name = instance_attrs.get('ec2_key_name')
         self.ec2_subnet_id = instance_attrs.get('ec2_subnet_id')
         self.hadoop_version = instance_attrs.get('hadoop_version')
         self.keep_job_flow_alive_when_no_steps = instance_attrs.get(
             'keep_job_flow_alive_when_no_steps')
-        self.master_security_group = instance_attrs.get(
-            'emr_managed_master_security_group')
+        self.main_security_group = instance_attrs.get(
+            'emr_managed_main_security_group')
         self.service_access_security_group = instance_attrs.get(
             'service_access_security_group')
-        self.slave_security_group = instance_attrs.get(
-            'emr_managed_slave_security_group')
+        self.subordinate_security_group = instance_attrs.get(
+            'emr_managed_subordinate_security_group')
         self.termination_protected = instance_attrs.get(
             'termination_protected')
 
@@ -180,11 +180,11 @@ class FakeCluster(BaseModel):
         return self.emr_backend.get_instance_groups(self.instance_group_ids)
 
     @property
-    def master_instance_type(self):
-        return self.emr_backend.instance_groups[self.master_instance_group_id].type
+    def main_instance_type(self):
+        return self.emr_backend.instance_groups[self.main_instance_group_id].type
 
     @property
-    def slave_instance_type(self):
+    def subordinate_instance_type(self):
         return self.emr_backend.instance_groups[self.core_instance_group_id].type
 
     @property
@@ -222,9 +222,9 @@ class FakeCluster(BaseModel):
 
     def add_instance_group(self, instance_group):
         if instance_group.role == 'MASTER':
-            if self.master_instance_group_id:
-                raise Exception('Cannot add another master instance group')
-            self.master_instance_group_id = instance_group.id
+            if self.main_instance_group_id:
+                raise Exception('Cannot add another main instance group')
+            self.main_instance_group_id = instance_group.id
         if instance_group.role == 'CORE':
             if self.core_instance_group_id:
                 raise Exception('Cannot add another core instance group')
